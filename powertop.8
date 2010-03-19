@@ -1,0 +1,38 @@
+.TH POWERTOP 8 "Sep 2, 2009" "Linux" "powertop manual"
+.SH NAME
+powertop \- program to analyze power consumption on Intel-based laptops
+.SH SYNOPSIS
+.B powertop
+.RB [ \-d ]
+.RB [ \-t
+.IR DOUBLE
+.RB ]
+.RB [ \-p ]
+.RB [ \-h ]
+.RB [ \-v ]
+.SH DESCRIPTION
+.Pp
+\fBpowertop\fP is a program that shows the power consumption on Intel-based
+laptops and makes suggestions on how to extend battery lifetime.
+.SH OPTIONS
+.TP
+\fB\-d\fR, \fB\-\-dump
+ read wakeups once and print list of top offenders.
+.TP
+\fB\-t\fR, \fB\-\-time\fR=\fIDOUBLE\fR
+ default time to gather data in seconds.
+.TP
+\fB\-p\fR, \fB\-\-pids
+ show pids in wakeups list.
+.TP
+\fB\-h\fR, \fB\-\-help
+ show the help message.
+.TP
+\fB\-v\fR, \fB\-\-version
+ show version information and exit.
+.SH BUGS
+Send bug reports to <power@bughost.org>
+.SH SEE ALSO
+The program is more fully described at http://www.lesswatts.org/projects/powertop/
+.SH AUTHOR
+powertop was written by Arjan van de Ven <arjan@linux.intel.com>, and is maintained by Auke Kok <auke@linux.intel.com>.
