@@ -14,7 +14,6 @@ OBJS = powertop.o config.o process.o misctips.o bluetooth.o display.o suggestion
 powertop: $(OBJS) Makefile powertop.h
 	$(CC) ${CFLAGS} $(LDFLAGS) $(OBJS) -lncurses -lc -o powertop
 	$(STRIP) powertop
-	@(cd po/ && $(MAKE))
 
 powertop.8.gz: powertop.8
 	gzip -c $< > $@
@@ -24,17 +23,9 @@ install: powertop powertop.8.gz
 	cp powertop ${DESTDIR}${BINDIR}
 	mkdir -p ${DESTDIR}${MANDIR}
 	cp powertop.8.gz ${DESTDIR}${MANDIR}
-	@(cd po/ && env LOCALESDIR=$(LOCALESDIR) DESTDIR=$(DESTDIR) $(MAKE) $@)
-
-# This is for translators. To update your po with new strings, do :
-# svn up ; make uptrans LG=fr # or de, ru, hu, it, ...
-uptrans:
-	@(cd po/ && env LG=$(LG) $(MAKE) $@)
 
 clean:
-	rm -f *~ powertop powertop.8.gz po/powertop.pot DEADJOE svn-commit* *.o *.orig 
-	@(cd po/ && $(MAKE) $@)
-
+	rm -f *~ powertop powertop.8.gz DEADJOE svn-commit* *.o *.orig 
 
 dist:
-	rm -rf .svn po/.svn DEADJOE po/DEADJOE todo.txt Lindent svn-commit.* dogit.sh git/ *.rej *.orig
+	rm -rf .svn DEADJOE todo.txt Lindent svn-commit.* dogit.sh git/ *.rej *.orig
