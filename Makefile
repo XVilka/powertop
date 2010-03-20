@@ -2,7 +2,7 @@ BINDIR=${HOME}/build/cross/sys-root/usr/bin
 LOCALESDIR=${HOME}/build/cross/sys-root/usr/share/locale
 MANDIR=${HOME}/build/cross/sys-root/usr/share/man/man1
 WARNFLAGS=-Wall -W -Wshadow
-CFLAGS= -static -g ${_XXCFLAGS} -D__ARM__ -I ${HOME}/build/cross/sys-root/usr/include -L ${HOME}/build/cross/sys-root/usr/lib ${WARNFLAGS}
+CFLAGS= -static -g ${_XXFLAGS} -D__ARM__ -I ${HOME}/build/cross/sys-root/usr/include -L ${HOME}/build/cross/sys-root/usr/lib ${WARNFLAGS}
 CC=arm-android-linux-uclibcgnueabi-gcc
 STRIP=arm-android-linux-uclibcgnueabi-sstrip
 
@@ -12,7 +12,7 @@ OBJS = powertop.o config.o process.o misctips.o bluetooth.o display.o suggestion
 	
 
 powertop: $(OBJS) Makefile powertop.h
-	$(CC) ${CFLAGS} $(LDFLAGS) $(OBJS) -lncurses -lc -o powertop
+	$(CC) ${CFLAGS} $(LDFLAGS) -lc -lncurses -o powertop $(OBJS)
 	$(STRIP) powertop
 
 powertop.8.gz: powertop.8
