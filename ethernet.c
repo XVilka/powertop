@@ -33,6 +33,7 @@
 #include <net/if.h>
 #include <linux/sockios.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
 
 /* work around a bug in debian -- it exposes kernel internal types to userspace */
 #define u64 __u64 

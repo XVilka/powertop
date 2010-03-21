@@ -26,21 +26,23 @@
 #ifndef __INCLUDE_GUARD_POWERTOP_H_
 #define __INCLUDE_GUARD_POWERTOP_H_
 
-#define VERSION "1.12"
+#ifndef IS_ANDROID
+  #include <libintl.h>
+#endif
 
-#if defined(__I386__)
-#define MAX_NUM_CSTATES 4
-#define MAX_NUM_PSTATES 6
-
-#elif defined(__ARM__)
-#define MAX_NUM_CSTATES 7
-#define MAX_NUM_PSTATES 5
-
+#if defined (__I386__)
+  #define MAX_NUM_CSTATES 4
+  #define MAX_NUM_PSTATES 6
+#elif defined (__ARM__)
+  #define MAX_NUM_CSTATES 7
+  #define MAX_NUM_PSTATES 5
 #else
-#error "No valid architecture is defined."
+  #error "No valid architecture defined!"
 #endif
 
 #define MAX_CSTATE_LINES (MAX_NUM_CSTATES + 3)
+
+#define VERSION "1.12"
 
 struct line {
 	char	*string;
@@ -102,7 +104,11 @@ extern suggestion_func *suggestion_activate;
         _x < _y ? _x : _y; })
 
 
-#define _(STRING)   STRING
+#ifdef IS_ANDROID
+  #define _(STRING)    STRING
+#else
+  #define _(STRING)    gettext(STRING)
+#endif
 
 
 #define PT_COLOR_DEFAULT    1
@@ -113,7 +119,6 @@ extern suggestion_func *suggestion_activate;
 #define PT_COLOR_GREEN      6
 #define PT_COLOR_BRIGHT     7
 #define PT_COLOR_BLUE	    8
-
 extern int maxwidth;
 
 void show_title_bar(void);
@@ -151,11 +156,10 @@ void do_ahci_stats(void);
 
 void display_usb_activity(void);
 void activate_usb_autosuspend(void);
-
-#if defined (__i386__)
-	void print_intel_cstates(void);
-#elif defined (__ARM__)
-	void print_arm_cstates(void);
+#if defined (__I386__)
+void print_intel_cstates(void);
+#elif defined(__ARM__)
+void print_arm_cstates(void);
 #endif
 
 void start_data_dirty_capture(void);

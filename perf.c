@@ -45,14 +45,11 @@
 
 /* some people have stale headers */
 #ifndef __NR_perf_event_open
-#ifdef __i386__
+#if defined(__i386__) || defined(__ARM__)
 #define __NR_perf_event_open	336
 #endif
 #if __x86_64__
 #define __NR_perf_event_open	298
-#endif
-#ifdef __ARM__
-#define __NR_perf_event_open    336
 #endif
 #endif
 

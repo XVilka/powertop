@@ -1,5 +1,6 @@
 1.12--
 	* Ported to ARM platform
+	* Added bionic and slang support
 1.11 --
 	* Fix compilation with PIC
 	* polling hint now refers to /dev/cdrom instead of /dev/scd0

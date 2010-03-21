@@ -30,6 +30,9 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <dirent.h>
+#ifndef IS_ANDROID
+  #include <libintl.h>
+#endif
 #include <ctype.h>
 #include <assert.h>
 #include <locale.h>
@@ -845,7 +848,17 @@ int main(int argc, char **argv)
 	uint64_t cur_usage[8], cur_duration[8];
 	double wakeups_per_second = 0;
 
-	setenv("TERM", "vt100", 1);
+#ifndef IS_ANDROID
+	setlocale (LC_ALL, "");
+	bindtextdomain ("powertop", "/usr/share/locale");
+	textdomain ("powertop");
+#endif
+
+#ifdef DEFAULT_TERM
+	if (!getenv("TERM"))
+	  setenv("TERM", DEFAULT_TERM, 1);
+#endif
+
 	start_data_dirty_capture();
 
 	while (1) {
@@ -911,13 +924,11 @@ int main(int argc, char **argv)
 		printf(_("PowerTOP needs to be run as root to collect enough information\n"));
 	printf(_("Collecting data for %i seconds \n"), (int)ticktime);
 	printf("\n\n");
-
-#if defined (__i386__)
- 	print_intel_cstates();
+#if defined (__I386__)
+	print_intel_cstates();
 #elif defined (__ARM__)
 	print_arm_cstates();
 #endif
-
 	stop_timerstats();
 
 	while (1) {

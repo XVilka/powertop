@@ -29,6 +29,7 @@
 #include <stdint.h>
 #include <sys/types.h>
 #include <dirent.h>
+#include <limits.h>
 
 #include "powertop.h"
 

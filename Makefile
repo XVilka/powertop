@@ -2,7 +2,11 @@ BINDIR=${HOME}/build/cross/sys-root/usr/bin
 LOCALESDIR=${HOME}/build/cross/sys-root/usr/share/locale
 MANDIR=${HOME}/build/cross/sys-root/usr/share/man/man1
 WARNFLAGS=-Wall -W -Wshadow
-CFLAGS= -static -g ${_XXFLAGS} -D__ARM__ -I ${HOME}/build/cross/sys-root/usr/include -L ${HOME}/build/cross/sys-root/usr/lib ${WARNFLAGS}
+CFLAGS= -static -g ${_XXFLAGS} \
+	  -D__ARM__ \
+	  -DIS_ANDROID=1 \
+	  -I ${HOME}/build/cross/sys-root/usr/include \
+	  -L ${HOME}/build/cross/sys-root/usr/lib ${WARNFLAGS}
 CC=arm-android-linux-uclibcgnueabi-gcc
 STRIP=arm-android-linux-uclibcgnueabi-sstrip
 

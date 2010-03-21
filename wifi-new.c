@@ -35,6 +35,7 @@
 #include <linux/types.h>
 #include <linux/sockios.h>
 #include <sys/ioctl.h>
+#include <sys/socket.h>
 /* satisfy weird wireless.h include dependencies */
 #include <sys/socket.h>
 #include <linux/if.h>
